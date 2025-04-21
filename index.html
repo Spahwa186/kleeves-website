@@ -1,67 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kleeves — Real Estate Guide</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kleeves Real Estate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background-color: #f7f9f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #0f4d3d;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 8rem 2rem;
+      animation: fadeIn 2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      color: #fffdd0;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      color: #e0f2f1;
+    }
+
+    .button {
+      background-color: #0f4d3d;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      margin-top: 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #146c54;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-content h2 {
+      margin-bottom: 1rem;
+      color: #0f4d3d;
+    }
+
+    .modal-content label {
+      display: block;
+      margin: 0.5rem 0 0.2rem;
+    }
+
+    .modal-content input,
+    .modal-content select,
+    .modal-content textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .modal-content button {
+      background-color: #0f4d3d;
+      color: white;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .modal-content button:hover {
+      background-color: #146c54;
+    }
+  </style>
 </head>
+
 <body>
   <header>
-    <div class="container">
-      <h1>Kleeves</h1>
-      <nav>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
+    <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Kleeves Logo" />
+    <h2>Kleeves Real Estate</h2>
   </header>
 
   <section class="hero">
-    <div class="container">
-      <h2>Find The Right Property, Stress-Free.</h2>
-      <p>We help you discover the best real estate options within your budget — for free.</p>
-      <a href="#contact" class="cta-button">Get Free Advice</a>
-    </div>
+    <h1>Find Your Dream Property with <span style="color: #ffeb3b">Kleeves</span></h1>
+    <p>Your trusted partner in finding the perfect home or investment.</p>
+    <button class="button" onclick="openModal('consultModal')">Schedule a Free Consultation</button>
   </section>
 
-  <section id="about" class="info-section">
-    <div class="container">
-      <h3>Why Kleeves?</h3>
-      <p>Unlike most real estate platforms, we focus on **you — the buyer**. We understand your needs and guide you to the best-suited properties based on your budget, preferences, and location. No pressure, no sales talk.</p>
-    </div>
-  </section>
+  <div id="consultModal" class="modal">
+    <div class="modal-content">
+      <h2>Book a Free Consultation</h2>
+      <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" required />
 
-  <section id="services" class="info-section">
-    <div class="container">
-      <h3>What We Offer</h3>
-      <ul>
-        <li>✔ Personalized property suggestions</li>
-        <li>✔ Free consultation with experts</li>
-        <li>✔ Loan assistance and project recommendations</li>
-        <li>✔ Trusted builder connections</li>
-      </ul>
-    </div>
-  </section>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" required />
 
-  <section id="contact" class="contact-section">
-    <div class="container">
-      <h3>Contact Us</h3>
-      <form action="https://formsubmit.co/YOUR_EMAIL_HERE" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="message" placeholder="Tell us your requirements" required></textarea>
-        <button type="submit">Send</button>
+        <label for="location">Preferred Location:</label>
+        <input type="text" id="location" />
+
+        <label for="budget">Budget:</label>
+        <select id="budget">
+          <option>Upto ₹1 Cr</option>
+          <option>Upto ₹2 Cr</option>
+          <option>Upto ₹3 Cr</option>
+          <option>More than ₹3 Cr</option>
+        </select>
+
+        <label for="propertySize">Property Size:</label>
+        <select id="propertySize">
+          <option>1 BHK</option>
+          <option>2 BHK</option>
+          <option>3 BHK</option>
+          <option>4 BHK</option>
+        </select>
+
+        <label for="type">Property Type:</label>
+        <select id="type">
+          <option>Apartment</option>
+          <option>Independent House</option>
+          <option>Plot</option>
+          <option>Commercial</option>
+        </select>
+
+        <label for="time">Preferred Time Slot:</label>
+        <input type="text" id="time" placeholder="e.g. Tomorrow 4 PM" />
+
+        <button type="submit">Submit</button>
+        <button type="button" onclick="closeModal('consultModal')" style="margin-left:10px;background:#ccc;color:black;">Cancel</button>
       </form>
     </div>
-  </section>
+  </div>
 
-  <footer>
-    <div class="container">
-      <p>© 2025 Kleeves. All rights reserved.</p>
-    </div>
-  </footer>
+  <script>
+    function openModal(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+  </script>
 </body>
+
 </html>
+
