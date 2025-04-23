@@ -133,6 +133,13 @@
     .modal-content button:hover {
       background-color: #146c54;
     }
+
+    .thank-you {
+      text-align: center;
+      color: #0f4d3d;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
   </style>
 </head>
 
@@ -144,25 +151,27 @@
 
   <section class="hero">
     <h1>Find Your Dream Property with <span style="color: #ffeb3b">Kleeves</span></h1>
-    <p>Your trusted partner in finding the perfect home or investment.</p>
+    <p style="color:#b2dfdb">Your trusted partner in finding the perfect home or investment.</p>
     <button class="button" onclick="openModal('consultModal')">Schedule a Free Consultation</button>
   </section>
 
   <div id="consultModal" class="modal">
     <div class="modal-content">
       <h2>Book a Free Consultation</h2>
-      <form>
+      <form name="contact" method="POST" data-netlify="true" onsubmit="handleSubmit(event)">
+        <input type="hidden" name="form-name" value="contact" />
+
         <label for="name">Name:</label>
-        <input type="text" id="name" required />
+        <input type="text" id="name" name="name" required />
 
         <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone" required />
+        <input type="tel" id="phone" name="phone" required />
 
         <label for="location">Preferred Location:</label>
-        <input type="text" id="location" />
+        <input type="text" id="location" name="location" />
 
         <label for="budget">Budget:</label>
-        <select id="budget">
+        <select id="budget" name="budget">
           <option>Upto ₹1 Cr</option>
           <option>Upto ₹2 Cr</option>
           <option>Upto ₹3 Cr</option>
@@ -170,7 +179,7 @@
         </select>
 
         <label for="propertySize">Property Size:</label>
-        <select id="propertySize">
+        <select id="propertySize" name="propertySize">
           <option>1 BHK</option>
           <option>2 BHK</option>
           <option>3 BHK</option>
@@ -178,7 +187,7 @@
         </select>
 
         <label for="type">Property Type:</label>
-        <select id="type">
+        <select id="type" name="type">
           <option>Apartment</option>
           <option>Independent House</option>
           <option>Plot</option>
@@ -186,10 +195,12 @@
         </select>
 
         <label for="time">Preferred Time Slot:</label>
-        <input type="text" id="time" placeholder="e.g. Tomorrow 4 PM" />
+        <input type="text" id="time" name="time" placeholder="e.g. Tomorrow 4 PM" />
 
         <button type="submit">Submit</button>
         <button type="button" onclick="closeModal('consultModal')" style="margin-left:10px;background:#ccc;color:black;">Cancel</button>
+
+        <div id="thankYouMessage" class="thank-you" style="display:none;">Thank you, we will reach out to you soon!</div>
       </form>
     </div>
   </div>
@@ -202,8 +213,26 @@
     function closeModal(id) {
       document.getElementById(id).style.display = 'none';
     }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const thankYouMessage = document.getElementById('thankYouMessage');
+
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(new FormData(form)).toString(),
+      })
+      .then(() => {
+        form.reset();
+        thankYouMessage.style.display = "block";
+      })
+      .catch((error) => alert("Form submission error: " + error));
+    }
   </script>
 </body>
 
 </html>
+
 
