@@ -175,7 +175,7 @@
 
   <section class="hero">
     <h1>Find Your Dream Property with <span style="color: #ffeb3b">Kleeves</span></h1>
-    <p style="color:#b2dfdb">Your trusted partner in finding the perfect home or investment.</p>
+    <p style="color:#ffffff">Your trusted partner in finding the perfect home or investment.</p>
     <button class="button" onclick="openModal('consultModal')">Schedule a Free Consultation</button>
   </section>
 
@@ -237,23 +237,41 @@
     function openModal(id) {
       document.getElementById(id).style.display = 'flex';
     }
-
+  
     function closeModal(id) {
       document.getElementById(id).style.display = 'none';
     }
-
-    function showThankYouPopup(event) {
-      event.preventDefault();
-      document.getElementById('thankYouPopup').style.display = 'block';
-      setTimeout(() => {
-        event.target.submit();
-      }, 1000); // Short delay before actual submit
-    }
-
-    function closeThankYouPopup() {
-      document.getElementById('thankYouPopup').style.display = 'none';
-    }
+  
+    document.getElementById("consultForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+  
+      const form = e.target;
+      const formData = new FormData(form);
+      const thankYouMessage = document.getElementById("thankYouMessage");
+  
+      fetch("https://formsubmit.co/ajax/kleeves.official@gmail.com", {
+        method: "POST",
+        headers: {
+          Accept: "application/json"
+        },
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          form.reset();
+          thankYouMessage.style.display = "block";
+  
+          // Redirect to homepage after 2 seconds
+          setTimeout(() => {
+            window.location.href = "https://kleeves.in/index.html"; 
+          }, 2000);
+        })
+        .catch(error => {
+          alert("Submission failed: " + error.message);
+        });
+    });
   </script>
+  
 </body>
 
 </html>
