@@ -140,6 +140,30 @@
       font-weight: bold;
       margin-top: 1rem;
     }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.25);
+      z-index: 1001;
+      display: none;
+      text-align: center;
+    }
+
+    .popup button {
+      margin-top: 1rem;
+      background: #0f4d3d;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
   </style>
 </head>
 
@@ -158,8 +182,9 @@
   <div id="consultModal" class="modal">
     <div class="modal-content">
       <h2>Book a Free Consultation</h2>
-      <form name="contact" method="POST" data-netlify="true" onsubmit="handleSubmit(event)">
-        <input type="hidden" name="form-name" value="contact" />
+      <form action="https://formsubmit.co/kleeves.official@gmail.com" method="POST" onsubmit="showThankYouPopup(event)">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
 
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required />
@@ -199,10 +224,13 @@
 
         <button type="submit">Submit</button>
         <button type="button" onclick="closeModal('consultModal')" style="margin-left:10px;background:#ccc;color:black;">Cancel</button>
-
-        <div id="thankYouMessage" class="thank-you" style="display:none;">Thank you, we will reach out to you soon!</div>
       </form>
     </div>
+  </div>
+
+  <div id="thankYouPopup" class="popup">
+    <p>Thank you! We’ll reach out to you soon.</p>
+    <button onclick="closeThankYouPopup()">Close</button>
   </div>
 
   <script>
@@ -214,25 +242,21 @@
       document.getElementById(id).style.display = 'none';
     }
 
-    function handleSubmit(e) {
-      e.preventDefault();
-      const form = e.target;
-      const thankYouMessage = document.getElementById('thankYouMessage');
+    function showThankYouPopup(event) {
+      event.preventDefault();
+      document.getElementById('thankYouPopup').style.display = 'block';
+      setTimeout(() => {
+        event.target.submit();
+      }, 1000); // Short delay before actual submit
+    }
 
-      fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(new FormData(form)).toString(),
-      })
-      .then(() => {
-        form.reset();
-        thankYouMessage.style.display = "block";
-      })
-      .catch((error) => alert("Form submission error: " + error));
+    function closeThankYouPopup() {
+      document.getElementById('thankYouPopup').style.display = 'none';
     }
   </script>
 </body>
 
 </html>
+
 
 
