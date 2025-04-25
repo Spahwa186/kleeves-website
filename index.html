@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kleeves Real Estate</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80" />
   <style>
     * {
       margin: 0;
@@ -34,33 +34,38 @@
     }
 
     .hero {
-      background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-      color: white;
-      text-align: center;
-      padding: 8rem 2rem;
-      animation: fadeIn 2s ease-in;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 20px;
+        background: linear-gradient(
+            rgb(0, 0, 0, 0.6),
+            rgb(0, 0, 0, 0.6)
+          ),
+          url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80") center/cover no-repeat;
+        background-attachment: fixed;
+        transition: background-image 0.3s ease-in-out;
+      
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
+    @media (max-width: 768px) {
+        .hero {
+          background-attachment: scroll;
+        }
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
       }
-    }
 
-    .hero h1 {
-      font-size: 3rem;
-      color: #fffdd0;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      margin-top: 1rem;
-      color: #e0f2f1;
+      p {
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin-bottom: 30px;
     }
 
     .button {
@@ -191,7 +196,7 @@
   </header>
 
   <section class="hero">
-    <h1>Find Your Dream Property with <span style="color: #ffeb3b">Kleeves</span></h1>
+    <h1><span style="color: #f3f3ee">Find Your Dream Property with</span> <span style="color: #ffeb3b">Kleeves</span></h1>
     <p style="color:#ffffff">Your trusted partner in finding the perfect home or investment.</p>
     <button class="button" onclick="openModal('consultModal')">Schedule a Free Consultation</button>
   </section>
