@@ -182,7 +182,7 @@
   <div id="consultModal" class="modal">
     <div class="modal-content">
       <h2>Book a Free Consultation</h2>
-      <form action="https://formsubmit.co/kleeves.official@gmail.com" method="POST" onsubmit="showThankYouPopup(event)">
+      <form id="consultForm" action="https://formsubmit.co/kleeves.official@gmail.com" method="POST" onsubmit="showThankYouPopup(event)">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_next" value="https://kleeves.in">
 
@@ -234,43 +234,46 @@
   </div>
 
   <script>
-    function openModal(id) {
-      document.getElementById(id).style.display = 'flex';
-    }
-  
-    function closeModal(id) {
-      document.getElementById(id).style.display = 'none';
-    }
-  
-    document.getElementById("consultForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-  
-      const form = e.target;
-      const formData = new FormData(form);
-      const thankYouMessage = document.getElementById("thankYouMessage");
-  
-      fetch("https://formsubmit.co/ajax/kleeves.official@gmail.com", {
-        method: "POST",
-        headers: {
-          Accept: "application/json"
-        },
-        body: formData
-      })
-        .then(response => response.json())
-        .then(data => {
-          form.reset();
-          thankYouMessage.style.display = "block";
-  
-          // Redirect to homepage after 2 seconds
-          setTimeout(() => {
-            window.location.href = "https://kleeves.in"; 
-          }, 2000);
-        })
-        .catch(error => {
-          alert("Submission failed: " + error.message);
-        });
+  function openModal(id) {
+    document.getElementById(id).style.display = 'flex';
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).style.display = 'none';
+  }
+
+  function showThankYouPopup(e) {
+    e.preventDefault();
+
+    const form = document.getElementById("consultForm");
+    const formData = new FormData(form);
+
+    fetch("https://formsubmit.co/ajax/kleeves.official@gmail.com", {
+      method: "POST",
+      headers: {
+        Accept: "application/json"
+      },
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      form.reset();
+      closeModal('consultModal');
+      document.getElementById("thankYouPopup").style.display = "block";
+
+      setTimeout(() => {
+        window.location.href = "https://kleeves.in";
+      }, 2500);
+    })
+    .catch(error => {
+      alert("Submission failed: " + error.message);
     });
-  </script>
+  }
+
+  function closeThankYouPopup() {
+    document.getElementById("thankYouPopup").style.display = "none";
+  }
+</script>
   
 </body>
 
