@@ -164,6 +164,23 @@
       border-radius: 8px;
       cursor: pointer;
     }
+
+    .section {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .section h2 {
+      color: #0f4d3d;
+      margin-bottom: 1rem;
+    }
+
+    .section p {
+      max-width: 800px;
+      margin: auto;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
   </style>
 </head>
 
@@ -233,6 +250,19 @@
     <button onclick="closeThankYouPopup()">Close</button>
   </div>
 
+  <section class="section">
+    <h2>Why Choose Kleeves?</h2>
+    <p>We are not just agents — we are your property partners. Whether you're a first-time buyer, investor, or someone looking to upgrade your lifestyle, Kleeves offers you the guidance, options, and transparency you need to make smart real estate decisions. Our mission is to provide clarity and confidence in every transaction.</p>
+  </section>
+
+  <section class="section" style="background-color:#e8f5e9">
+    <h2>What We Offer</h2>
+    <p>• Curated property listings that match your budget and needs<br>
+       • Free personal consultation calls with our expert team<br>
+       • Verified builder projects and resale properties<br>
+       • End-to-end support, including home loan assistance and site visits</p>
+  </section>
+
   <script>
   function openModal(id) {
     document.getElementById(id).style.display = 'flex';
@@ -273,8 +303,8 @@
   function closeThankYouPopup() {
     document.getElementById("thankYouPopup").style.display = "none";
   }
-</script>
-  
+  </script>
+
 </body>
 
 </html>
